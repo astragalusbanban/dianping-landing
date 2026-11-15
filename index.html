@@ -202,6 +202,44 @@ header .wrap{display:flex;align-items:center;gap:var(--s200);padding-top:var(--s
 .panda-btn{width:48px;height:48px;border-radius:9999px;background:var(--tint);border:2px solid var(--card);box-shadow:0 8px 16px -6px rgba(62,38,25,0.35);overflow:hidden}
 .panda-btn img{object-fit:cover;object-position:center}
 .picker-panda{position:absolute;right:var(--s300);top:-92px;width:150px;aspect-ratio:900/606;z-index:2;filter:drop-shadow(0 12px 16px rgba(40,10,0,0.45))}
+/* 手绘首页 mock */
+.mock{aspect-ratio:750/1624;border-radius:24px;overflow:hidden;background:#F6F3F1;color:var(--brown);position:relative;padding:var(--s100) var(--s100) 0;display:flex;flex-direction:column;gap:var(--s75)}
+.mock svg{width:14px;height:14px;flex:none}
+.m-status{display:flex;justify-content:space-between;color:var(--brown)}
+.m-city small{color:var(--brand)}
+.m-search{display:flex;align-items:center;gap:var(--s50);background:var(--card);border:1px solid #F3C9B6;border-radius:9999px;padding:var(--s50) var(--s100);color:var(--brown-3)}
+.m-card{background:var(--card);border:2px solid var(--brand);border-radius:12px;padding:var(--s75)}
+.m-card-head{display:flex;justify-content:space-between;align-items:center}
+.m-spark{color:var(--brand)}
+.m-pick{display:flex;gap:var(--s75);align-items:center;margin-top:var(--s75)}
+.m-thumb{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,#FF8A5C,#C9461B);color:var(--card);display:flex;align-items:center;justify-content:center}
+.m-thumb svg{width:22px;height:22px}
+.m-match{color:var(--ink-orange)}
+.m-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s50);text-align:center;background:var(--card);border-radius:12px;padding:var(--s75) var(--s25)}
+.m-grid span{display:flex;flex-direction:column;align-items:center;gap:var(--s25)}
+.m-grid i{width:30px;height:30px;border-radius:8px;background:var(--tint);color:var(--ink-orange);display:flex;align-items:center;justify-content:center}
+.m-grid span:first-child i{background:var(--brand);color:var(--card)}
+.m-bar{display:flex;align-items:center;gap:var(--s50);background:var(--card);border-radius:12px;padding:var(--s75);color:var(--brown-2)}
+.m-bar svg{color:var(--brand)}
+.m-fab{position:absolute;right:var(--s75);bottom:var(--s300);display:flex;flex-direction:column;align-items:center;gap:var(--s25)}
+.m-fab img{width:52px;height:52px;border-radius:9999px;background:var(--tint);border:2px solid var(--card);object-fit:cover;box-shadow:0 8px 16px -6px rgba(62,38,25,0.4)}
+.m-fab span{background:var(--card);color:var(--ink-orange);border:1px solid #F3C9B6;border-radius:9999px;padding:0 var(--s75)}
+/* 三步里的图标卡 */
+.icon-card{background:var(--card);color:var(--brown);border-radius:16px;padding:var(--s200);box-shadow:0 24px 48px -24px rgba(40,10,0,0.6)}
+.icon-card.ui-row{display:flex;align-items:center;justify-content:space-between;gap:var(--s200)}
+.tap{position:relative;width:56px;height:56px;flex:none}
+.tap img{width:56px;height:56px;border-radius:9999px;background:var(--tint);border:2px solid var(--card);box-shadow:0 8px 16px -6px rgba(62,38,25,0.4);object-fit:cover}
+.tap i{position:absolute;right:-10px;bottom:-12px;width:28px;height:28px;color:var(--brown);animation:tap 1.6s var(--ease) infinite}
+.tap i svg{width:28px;height:28px}
+@keyframes tap{0%,100%{transform:translate(0,0)}50%{transform:translate(-4px,-4px) scale(0.92)}}
+.chips-mini{display:flex;flex-wrap:wrap;gap:var(--s75)}
+.chips-mini span{display:inline-flex;align-items:center;gap:var(--s50);padding:var(--s50) var(--s100);border-radius:9999px;background:var(--tint);color:var(--ink-orange)}
+.chips-mini svg{width:14px;height:14px}
+.rank{display:grid;gap:var(--s100)}
+.rank-row{display:flex;align-items:center;gap:var(--s100)}
+.rank-row .title-4{flex:1}
+.rank-row .fi{width:32px;height:32px;border-radius:10px;background:var(--tint);color:var(--ink-orange);display:flex;align-items:center;justify-content:center}
+.rank-row .fi svg{width:18px;height:18px}
 /* 真实截图片段 */
 .shot{border-radius:16px;overflow:hidden;background:var(--card);box-shadow:0 24px 48px -24px rgba(40,10,0,0.6)}
 .shot img{width:100%;height:auto;display:block}
@@ -305,6 +343,14 @@ footer{background:var(--brand);color:var(--brown);padding:var(--s400) 0}
 
 /* ===== Mobile ===== */
 @media (max-width:767px){
+  .visual .phone{width:196px}
+  .mock{padding:var(--s75) var(--s75) 0;gap:var(--s50)}
+  .mock .title-4{font-size:12px;line-height:16px}
+  .mock .caption-3,.mock .caption-5{font-size:10px;line-height:14px}
+  .mock svg{width:12px;height:12px}
+  .m-thumb{width:34px;height:34px}.m-thumb svg{width:18px;height:18px}
+  .m-grid i{width:24px;height:24px}
+  .m-fab{bottom:var(--s200)}.m-fab img{width:40px;height:40px}
   footer{padding-bottom:calc(var(--s400) + 72px + env(safe-area-inset-bottom))}
   .heading-1{font-size:36px}
   .heading-2{font-size:30px}
@@ -332,7 +378,14 @@ footer{background:var(--brand);color:var(--brown);padding:var(--s400) 0}
   .visual .phone{width:220px}
   .panda-hero{width:340px}
   .chat{width:330px}
-  .convert-grid{grid-template-columns:1.1fr 0.9fr;gap:var(--s400)}
+  .convert-grid{gap:var(--s400)}
+  .picker{display:grid;grid-template-columns:1fr 1fr;column-gap:var(--s600);align-items:start}
+  .picker > *{grid-column:1/-1}
+  .picker > .field{grid-column:auto}
+  .picker > .summary{grid-column:1;align-self:center}
+  .picker > .btn-main{grid-column:2}
+  .picker > .fine{grid-column:2}
+  .promise{grid-template-columns:repeat(3,1fr);gap:var(--s400)}
   .rail{display:grid;grid-template-columns:repeat(5,1fr);overflow:visible;margin:0;padding:var(--s50) 0 var(--s300)}
   .dish{max-width:none}
   .dots,.sticky{display:none}
@@ -369,6 +422,12 @@ footer{background:var(--brand);color:var(--brown);padding:var(--s400) 0}
   <symbol id="i-tag" viewBox="0 0 256 256"><path d="M42 136V48a8 8 0 0 1 8-8h88l90 90a8 8 0 0 1 0 11l-87 87a8 8 0 0 1-11 0Z" fill="none" stroke="currentColor" stroke-width="20" stroke-linejoin="round"/><circle cx="88" cy="88" r="16" fill="currentColor"/></symbol>
   <symbol id="i-chat" viewBox="0 0 256 256"><path d="M80 200l-40 24V64a16 16 0 0 1 16-16h144a16 16 0 0 1 16 16v120a16 16 0 0 1-16 16Z" fill="none" stroke="currentColor" stroke-width="20" stroke-linejoin="round"/><path d="M92 124l24 24 48-48" fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-calcheck" viewBox="0 0 256 256"><rect x="40" y="48" width="176" height="168" rx="12" fill="none" stroke="currentColor" stroke-width="20"/><path d="M176 24v48M80 24v48M40 96h176M96 152l24 24 44-44" fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-search" viewBox="0 0 256 256"><circle cx="116" cy="116" r="72" fill="none" stroke="currentColor" stroke-width="22"/><path d="M168 168l52 52" stroke="currentColor" stroke-width="22" stroke-linecap="round"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 256 256"><path d="M128 232c-44 0-76-30-76-72 0-52 52-76 52-128 0 0 64 28 64 92 12-8 20-24 20-40 20 16 16 44 16 76 0 42-32 72-76 72Z" fill="none" stroke="currentColor" stroke-width="20" stroke-linejoin="round"/></symbol>
+  <symbol id="i-coin" viewBox="0 0 256 256"><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-width="20"/><path d="M96 84l32 40 32-40M128 124v60M100 136h56M100 164h56" fill="none" stroke="currentColor" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-users" viewBox="0 0 256 256"><circle cx="96" cy="96" r="40" fill="none" stroke="currentColor" stroke-width="20"/><path d="M24 208c8-36 36-56 72-56s64 20 72 56M168 60a40 40 0 0 1 0 72M200 156c20 8 32 26 36 52" fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="round"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 256 256"><path d="M128 232s-72-60-72-124a72 72 0 0 1 144 0c0 64-72 124-72 124Z" fill="none" stroke="currentColor" stroke-width="20" stroke-linejoin="round"/><circle cx="128" cy="108" r="24" fill="currentColor"/></symbol>
+  <symbol id="i-hand" viewBox="0 0 256 256"><path d="M104 132V52a20 20 0 0 1 40 0v68l48 10c18 4 28 20 24 38l-10 46a24 24 0 0 1-24 18h-62a24 24 0 0 1-20-12l-36-60a18 18 0 0 1 30-20Z" fill="none" stroke="currentColor" stroke-width="18" stroke-linejoin="round"/></symbol>
 </svg>
 
 <header>
@@ -406,9 +465,97 @@ footer{background:var(--brand);color:var(--brown);padding:var(--s400) 0}
     </div>
 
     <div class="visual" aria-hidden="true">
-      <div class="phone"><div class="ph" data-file="images/home-float.jpg"><img src="images/home-float.jpg" alt="" onerror="this.parentNode.classList.add('missing')"></div></div>
+      <div class="phone"><div class="mock">
+        <div class="m-status caption-3"><span>09:17</span><span>●●●</span></div>
+        <div class="m-city title-4"><span lang="zh">沈阳</span><span lang="en">Shenyang</span> <small>▾</small></div>
+        <div class="m-search caption-5"><svg aria-hidden="true"><use href="#i-search"/></svg><span lang="zh">搜索店铺、美食</span><span lang="en">Search places, dishes</span></div>
+        <div class="m-card">
+          <div class="m-card-head title-4"><span lang="zh">猜你馋了</span><span lang="en">Daily picks</span><span class="m-spark"><svg aria-hidden="true"><use href="#i-spark"/></svg></span></div>
+          <div class="m-pick"><span class="m-thumb"><svg aria-hidden="true"><use href="#i-flame"/></svg></span><div><p class="title-4"><span lang="zh">川菜</span><span lang="en">Sichuan</span></p><p class="m-match caption-3"><span lang="zh">与你匹配 97%</span><span lang="en">97% match</span></p></div></div>
+        </div>
+        <div class="m-grid caption-5">
+          <span><i><svg aria-hidden="true"><use href="#i-target"/></svg></i><span lang="zh">匹配</span><span lang="en">Match</span></span>
+          <span><i><svg aria-hidden="true"><use href="#i-shield"/></svg></i><span lang="zh">避雷</span><span lang="en">Alerts</span></span>
+          <span><i><svg aria-hidden="true"><use href="#i-clock"/></svg></i><span lang="zh">排队</span><span lang="en">Queue</span></span>
+          <span><i><svg aria-hidden="true"><use href="#i-chat"/></svg></i><span lang="zh">投票</span><span lang="en">Vote</span></span>
+        </div>
+        <div class="m-bar caption-5"><svg aria-hidden="true"><use href="#i-calcheck"/></svg><span lang="zh">今晚 7 点有位</span><span lang="en">Table at 7 pm</span></div>
+        <div class="m-fab"><img src="images/panda-lie-head.png" alt=""><span class="caption-3"><span lang="zh">点仔推荐</span><span lang="en">Ask panda</span></span></div>
+      </div></div>
       <div class="ph panda-hero" data-file="images/panda-lie.png"><img src="images/panda-lie.png" alt="" onerror="this.parentNode.classList.add('missing')"></div>
     </div>
+  </div>
+</section>
+
+<!-- ③ 痛点 -->
+<section id="pain">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow caption-3"><span lang="zh">你是不是也这样</span><span lang="en">Sound familiar?</span></span>
+      <h2 class="display heading-2"><span lang="zh">选一家店，比吃饭还累</span><span lang="en">Picking a place is harder than eating</span></h2>
+    </div>
+    <div class="pain-grid">
+      <article class="card pain reveal">
+        <div class="pain-img"><img src="images/pain-rating.jpg" alt="一道精致的高分餐厅菜品" loading="lazy"></div>
+        <div class="big">4.8<small>★</small></div>
+        <h3 class="heading-6"><span lang="zh">4.8 分的店，也不一定适合你</span><span lang="en">A 4.8 rating doesn't mean it suits you</span></h3>
+        <p class="body-6"><span lang="zh">总分是所有人的平均，不是你的口味和预算。</span><span lang="en">The score averages everyone, not your taste or budget.</span></p>
+      </article>
+      <article class="card pain reveal">
+        <div class="pain-img"><img src="images/pain-group.jpg" alt="朋友聚餐的一桌火锅" loading="lazy"></div>
+        <div class="say body-6"><span lang="zh">随便</span><span lang="zh">都行</span><span lang="zh">你定吧</span><span lang="en">Whatever</span><span lang="en">Anything</span><span lang="en">You pick</span></div>
+        <h3 class="heading-6"><span lang="zh">群里全是“随便”“都行”，没人拍板</span><span lang="en">The group chat says "whatever" and nobody decides</span></h3>
+        <p class="body-6"><span lang="zh">链接发了一堆，聊了半小时，还是没定下来。</span><span lang="en">Links pile up, half an hour passes, still no plan.</span></p>
+      </article>
+      <article class="card pain reveal">
+        <div class="pain-img"><img src="images/pain-queue.jpg" alt="蒸笼里热腾腾的小笼包" loading="lazy"></div>
+        <div class="big">40<small lang="zh"> 分钟</small><small lang="en"> min</small></div>
+        <h3 class="heading-6"><span lang="zh">到店才发现要排 40 分钟</span><span lang="en">You arrive to a 40 minute queue</span></h3>
+        <p class="body-6"><span lang="zh">饿着肚子在门口等号，今晚的计划全乱了。</span><span lang="en">Hungry at the door, and the evening plan falls apart.</span></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ④ 三步 -->
+<section id="how" style="padding-top:0">
+  <div class="wrap">
+    <div class="head-art">
+      <div class="sec-head reveal">
+        <span class="eyebrow caption-3"><span lang="zh">三步搞定</span><span lang="en">How it works</span></span>
+        <h2 class="display heading-2"><span lang="zh">点一下，选几项，就有答案</span><span lang="en">One tap, a few choices, done</span></h2>
+      </div>
+      <div class="ph art reveal" data-file="images/panda-checkin.png"><img src="images/panda-checkin.png" alt="" onerror="this.parentNode.classList.add('missing')"></div>
+    </div>
+    <ol class="steps">
+      <li class="step reveal">
+        <div class="n">01</div>
+        <h3 class="heading-6"><span lang="zh">点首页的小熊猫</span><span lang="en">Tap the panda on the home screen</span></h3>
+        <p class="body-6"><span lang="zh">它就在大众点评首页右下角。</span><span lang="en">It sits at the bottom right of the Dianping home screen.</span></p>
+        <div class="ui icon-card ui-row">
+          <span class="body-6 ui-muted"><span lang="zh">首页右下角，随时都在</span><span lang="en">Always at the bottom right</span></span>
+          <span class="tap"><img src="images/panda-lie-head.png" alt=""><i><svg aria-hidden="true"><use href="#i-hand"/></svg></i></span>
+        </div>
+      </li>
+      <li class="step reveal">
+        <div class="n">02</div>
+        <h3 class="heading-6"><span lang="zh">选口味、预算、人数</span><span lang="en">Pick taste, budget and party size</span></h3>
+        <p class="body-6"><span lang="zh">再选个区域，几秒钟就填完。</span><span lang="en">Add an area. It takes seconds.</span></p>
+        <div class="ui icon-card chips-mini caption-3">
+          <span><svg aria-hidden="true"><use href="#i-flame"/></svg><span lang="zh">川菜</span><span lang="en">Sichuan</span></span><span><svg aria-hidden="true"><use href="#i-coin"/></svg>¥120</span><span><svg aria-hidden="true"><use href="#i-users"/></svg><span lang="zh">4 人</span><span lang="en">4 ppl</span></span><span><svg aria-hidden="true"><use href="#i-pin"/></svg><span lang="zh">中街</span><span lang="en">Zhongjie</span></span>
+        </div>
+      </li>
+      <li class="step reveal">
+        <div class="n">03</div>
+        <h3 class="heading-6"><span lang="zh">得到为你排序的推荐</span><span lang="en">Get places ranked for you</span></h3>
+        <p class="body-6"><span lang="zh">按“与你匹配”排序，最适合你的排最前。</span><span lang="en">Sorted by match, best fit first.</span></p>
+        <div class="ui icon-card rank">
+          <div class="rank-row"><span class="fi"><svg aria-hidden="true"><use href="#i-flame"/></svg></span><span class="title-4"><span lang="zh">川菜</span><span lang="en">Sichuan</span></span><span class="ui-match caption-3">97%</span></div>
+          <div class="rank-row"><span class="fi"><svg aria-hidden="true"><use href="#i-target"/></svg></span><span class="title-4"><span lang="zh">日料</span><span lang="en">Japanese</span></span><span class="ui-match caption-3">95%</span></div>
+          <div class="rank-row"><span class="fi"><svg aria-hidden="true"><use href="#i-heart"/></svg></span><span class="title-4"><span lang="zh">法餐</span><span lang="en">French</span></span><span class="ui-match caption-3">93%</span></div>
+        </div>
+      </li>
+    </ol>
   </div>
 </section>
 
@@ -477,74 +624,8 @@ footer{background:var(--brand);color:var(--brown);padding:var(--s400) 0}
   </div>
 </section>
 
-<!-- ③ 痛点 -->
-<section id="pain">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow caption-3"><span lang="zh">你是不是也这样</span><span lang="en">Sound familiar?</span></span>
-      <h2 class="display heading-2"><span lang="zh">选一家店，比吃饭还累</span><span lang="en">Picking a place is harder than eating</span></h2>
-    </div>
-    <div class="pain-grid">
-      <article class="card pain reveal">
-        <div class="pain-img"><img src="images/pain-rating.jpg" alt="一道精致的高分餐厅菜品" loading="lazy"></div>
-        <div class="big">4.8<small>★</small></div>
-        <h3 class="heading-6"><span lang="zh">4.8 分的店，也不一定适合你</span><span lang="en">A 4.8 rating doesn't mean it suits you</span></h3>
-        <p class="body-6"><span lang="zh">总分是所有人的平均，不是你的口味和预算。</span><span lang="en">The score averages everyone, not your taste or budget.</span></p>
-      </article>
-      <article class="card pain reveal">
-        <div class="pain-img"><img src="images/pain-group.jpg" alt="朋友聚餐的一桌火锅" loading="lazy"></div>
-        <div class="say body-6"><span lang="zh">随便</span><span lang="zh">都行</span><span lang="zh">你定吧</span><span lang="en">Whatever</span><span lang="en">Anything</span><span lang="en">You pick</span></div>
-        <h3 class="heading-6"><span lang="zh">群里全是“随便”“都行”，没人拍板</span><span lang="en">The group chat says "whatever" and nobody decides</span></h3>
-        <p class="body-6"><span lang="zh">链接发了一堆，聊了半小时，还是没定下来。</span><span lang="en">Links pile up, half an hour passes, still no plan.</span></p>
-      </article>
-      <article class="card pain reveal">
-        <div class="pain-img"><img src="images/pain-queue.jpg" alt="蒸笼里热腾腾的小笼包" loading="lazy"></div>
-        <div class="big">40<small lang="zh"> 分钟</small><small lang="en"> min</small></div>
-        <h3 class="heading-6"><span lang="zh">到店才发现要排 40 分钟</span><span lang="en">You arrive to a 40 minute queue</span></h3>
-        <p class="body-6"><span lang="zh">饿着肚子在门口等号，今晚的计划全乱了。</span><span lang="en">Hungry at the door, and the evening plan falls apart.</span></p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ④ 三步 -->
-<section id="how" style="padding-top:0">
-  <div class="wrap">
-    <div class="head-art">
-      <div class="sec-head reveal">
-        <span class="eyebrow caption-3"><span lang="zh">三步搞定</span><span lang="en">How it works</span></span>
-        <h2 class="display heading-2"><span lang="zh">点一下，选几项，就有答案</span><span lang="en">One tap, a few choices, done</span></h2>
-      </div>
-      <div class="ph art reveal" data-file="images/panda-checkin.png"><img src="images/panda-checkin.png" alt="" onerror="this.parentNode.classList.add('missing')"></div>
-    </div>
-    <ol class="steps">
-      <li class="step reveal">
-        <div class="n">01</div>
-        <h3 class="heading-6"><span lang="zh">点首页的小熊猫</span><span lang="en">Tap the panda on the home screen</span></h3>
-        <p class="body-6"><span lang="zh">它就在大众点评首页右下角。</span><span lang="en">It sits at the bottom right of the Dianping home screen.</span></p>
-        <div class="ui shot-row">
-          <div class="shot small"><img src="images/shot-panda-btn.jpg" alt="首页右下角的点仔推荐按钮"></div>
-          <span class="body-6 ui-muted"><span lang="zh">首页右下角，随时都在</span><span lang="en">Always at the bottom right of Home</span></span>
-        </div>
-      </li>
-      <li class="step reveal">
-        <div class="n">02</div>
-        <h3 class="heading-6"><span lang="zh">选口味、预算、人数</span><span lang="en">Pick taste, budget and party size</span></h3>
-        <p class="body-6"><span lang="zh">再选个区域，几秒钟就填完。</span><span lang="en">Add an area. It takes seconds.</span></p>
-        <div class="ui shot"><img src="images/shot-form.jpg" alt="选择最近状态、口味偏好、用餐人数和人均预算"></div>
-      </li>
-      <li class="step reveal">
-        <div class="n">03</div>
-        <h3 class="heading-6"><span lang="zh">得到为你排序的推荐</span><span lang="en">Get places ranked for you</span></h3>
-        <p class="body-6"><span lang="zh">按“与你匹配”排序，最适合你的排最前。</span><span lang="en">Sorted by match, best fit first.</span></p>
-        <div class="ui shot"><img src="images/shot-result.jpg" alt="推荐结果卡片：与你匹配、排队时间和今晚空位"></div>
-      </li>
-    </ol>
-  </div>
-</section>
-
 <!-- ⑤ 猜你馋了 -->
-<section id="daily" style="padding-top:0">
+<section id="daily">
   <div class="wrap">
     <div class="head-art">
       <div class="sec-head reveal">
