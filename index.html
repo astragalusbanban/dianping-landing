@@ -215,6 +215,11 @@ header .wrap{display:flex;align-items:center;gap:var(--s200);padding-top:var(--s
 .feat{position:relative}
 .feat .feat-art{position:absolute;top:-24px;right:-8px;width:104px;aspect-ratio:1;filter:drop-shadow(0 12px 20px rgba(60,10,0,0.45));z-index:2}
 .feat .feat-art.wide{width:148px;aspect-ratio:1672/941;top:-16px}
+.feat-list{list-style:none;margin-top:auto;display:grid;gap:var(--s200);background:var(--card);color:var(--brown);border-radius:16px;padding:var(--s300) var(--s200);box-shadow:0 24px 48px -24px rgba(40,10,0,0.6)}
+.feat-list li{display:flex;gap:var(--s100);align-items:center}
+.feat-list .fi{width:44px;height:44px;flex:none;border-radius:12px;background:var(--tint);color:var(--ink-orange);display:flex;align-items:center;justify-content:center}
+.feat-list .fi svg{width:24px;height:24px}
+.feat-list .caption-5{color:var(--brown-3);margin-top:var(--s25)}
 .feat .shot{margin-top:auto}
 
 /* ===== 猜你馋了 ===== */
@@ -357,6 +362,13 @@ footer{background:var(--brand);color:var(--brown);padding:var(--s400) 0}
   <symbol id="i-shield" viewBox="0 0 256 256"><path d="M40 56v56c0 84 88 112 88 112s88-28 88-112V56l-88-24Z" fill="none" stroke="currentColor" stroke-width="20" stroke-linejoin="round"/><path d="M92 128l24 24 48-48" fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-gift" viewBox="0 0 256 256"><rect x="32" y="88" width="192" height="48" rx="8" fill="none" stroke="currentColor" stroke-width="20"/><path d="M208 136v72a8 8 0 0 1-8 8H56a8 8 0 0 1-8-8v-72M128 88v128M128 88s-40 0-52-12a20 20 0 0 1 28-28c12 12 24 40 24 40Zm0 0s40 0 52-12a20 20 0 0 0-28-28c-12 12-24 40-24 40Z" fill="none" stroke="currentColor" stroke-width="20" stroke-linejoin="round"/></symbol>
   <symbol id="i-clock" viewBox="0 0 256 256"><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-width="20"/><path d="M128 72v56h56" fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-target" viewBox="0 0 256 256"><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-width="20"/><circle cx="128" cy="128" r="52" fill="none" stroke="currentColor" stroke-width="20"/><circle cx="128" cy="128" r="12" fill="currentColor"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 256 256"><rect x="40" y="48" width="176" height="168" rx="12" fill="none" stroke="currentColor" stroke-width="20"/><path d="M176 24v48M80 24v48M40 96h176" fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="round"/><path d="M128 120l10 22 24 3-18 16 5 24-21-12-21 12 5-24-18-16 24-3z" fill="currentColor"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 256 256"><path d="M128 216S28 160 28 96a52 52 0 0 1 100-20 52 52 0 0 1 100 20c0 64-100 120-100 120Z" fill="none" stroke="currentColor" stroke-width="20" stroke-linejoin="round"/></symbol>
+  <symbol id="i-receipt" viewBox="0 0 256 256"><path d="M56 216V48a8 8 0 0 1 8-8h128a8 8 0 0 1 8 8v168l-32-16-32 16-32-16Z" fill="none" stroke="currentColor" stroke-width="20" stroke-linejoin="round"/><path d="M96 104l20 20 44-44M96 160h64" fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 256 256"><path d="M42 136V48a8 8 0 0 1 8-8h88l90 90a8 8 0 0 1 0 11l-87 87a8 8 0 0 1-11 0Z" fill="none" stroke="currentColor" stroke-width="20" stroke-linejoin="round"/><circle cx="88" cy="88" r="16" fill="currentColor"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 256 256"><path d="M80 200l-40 24V64a16 16 0 0 1 16-16h144a16 16 0 0 1 16 16v120a16 16 0 0 1-16 16Z" fill="none" stroke="currentColor" stroke-width="20" stroke-linejoin="round"/><path d="M92 124l24 24 48-48" fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-calcheck" viewBox="0 0 256 256"><rect x="40" y="48" width="176" height="168" rx="12" fill="none" stroke="currentColor" stroke-width="20"/><path d="M176 24v48M80 24v48M40 96h176M96 152l24 24 44-44" fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
 
 <header>
@@ -396,14 +408,6 @@ footer{background:var(--brand);color:var(--brown);padding:var(--s400) 0}
     <div class="visual" aria-hidden="true">
       <div class="phone"><div class="ph" data-file="images/home-float.jpg"><img src="images/home-float.jpg" alt="" onerror="this.parentNode.classList.add('missing')"></div></div>
       <div class="ph panda-hero" data-file="images/panda-lie.png"><img src="images/panda-lie.png" alt="" onerror="this.parentNode.classList.add('missing')"></div>
-      <div class="chat">
-        <div class="bubble me body-6"><span lang="zh">4 个人，人均 120，想吃辣</span><span lang="en">4 of us, about ¥120 each, something spicy</span></div>
-        <div class="bubble ai body-6">
-          <div class="ai-label caption-3"><span>小熊猫 AI</span><span lang="zh">今晚</span><span lang="en">Tonight</span></div>
-          <span lang="zh">一家川菜馆 <span class="tag match">与你匹配 97%</span><br>排队 10 分钟，今晚 7 点有位 <span class="tag ok">已到店评价</span></span>
-          <span lang="en">A Sichuan spot <span class="tag match">97% match</span><br>10 min queue, table at 7 pm <span class="tag ok">verified reviews</span></span>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -468,7 +472,6 @@ footer{background:var(--brand);color:var(--brown);padding:var(--s400) 0}
       </ul>
       <figure class="mini-quote">
         <blockquote>“会比我自己一家一家地翻，减少一些时间成本。”</blockquote>
-        <figcaption><cite class="body-6">— 梅馨予 <span lang="zh">· 用户访谈</span><span lang="en">· user interview</span></cite></figcaption>
       </figure>
     </div>
   </div>
@@ -574,19 +577,31 @@ footer{background:var(--brand);color:var(--brown);padding:var(--s400) 0}
         <div><span class="kicker caption-3">01 · Find it</span><h3 class="display heading-5">Match with You</h3></div>
         <p class="desc body-6"><span lang="zh">按口味、预算、人数和区域，推荐按“与你匹配”排序，而不是只看总分。每天还有“猜你馋了”5 家。</span><span lang="en">Ranked by how well each place fits your taste, budget, group and area, not just the overall score. Plus five daily picks.</span></p>
         <div class="ph feat-art" data-file="images/panda-eat.png"><img src="images/panda-eat.png" alt="" onerror="this.parentNode.classList.add('missing')"></div>
-        <div class="shot"><img src="images/shot-daily.jpg" alt="首页的猜你馋了卡片"></div>
+        <ul class="feat-list">
+          <li><span class="fi"><svg aria-hidden="true"><use href="#i-target"/></svg></span><div><p class="title-4"><span lang="zh">按“与你匹配”排序</span><span lang="en">Ranked by match</span></p><p class="caption-5"><span lang="zh">口味、预算、人数、区域一起算</span><span lang="en">Taste, budget, group and area combined</span></p></div></li>
+          <li><span class="fi"><svg aria-hidden="true"><use href="#i-calendar"/></svg></span><div><p class="title-4"><span lang="zh">每天“猜你馋了”5 家</span><span lang="en">Five daily picks</span></p><p class="caption-5"><span lang="zh">打开就有灵感</span><span lang="en">Ideas the moment you open it</span></p></div></li>
+          <li><span class="fi"><svg aria-hidden="true"><use href="#i-heart"/></svg></span><div><p class="title-4"><span lang="zh">越吃越懂你</span><span lang="en">Learns as you eat</span></p><p class="caption-5"><span lang="zh">收藏、评分和饭后反馈</span><span lang="en">From saves, ratings and feedback</span></p></div></li>
+        </ul>
       </article>
       <article class="feat reveal">
         <div><span class="kicker caption-3">02 · Trust it</span><h3 class="display heading-5">Verified <span lang="zh">避雷</span> Alert</h3></div>
         <p class="desc body-6"><span lang="zh">最近 30 天的吐槽标签，只统计有核销订单的真实到店用户。</span><span lang="en">Complaint tags from the last 30 days, counted only from diners with a redeemed order.</span></p>
         <div class="ph feat-art" data-file="images/panda-detective.png"><img src="images/panda-detective.png" alt="" onerror="this.parentNode.classList.add('missing')"></div>
-        <div class="shot"><img src="images/shot-alert.jpg" alt="店铺页的近 30 天避雷摘要，只统计已到店用户"></div>
+        <ul class="feat-list">
+          <li><span class="fi"><svg aria-hidden="true"><use href="#i-receipt"/></svg></span><div><p class="title-4"><span lang="zh">只算核销订单</span><span lang="en">Redeemed orders only</span></p><p class="caption-5"><span lang="zh">没到过店的人刷不进来</span><span lang="en">No visit, no vote</span></p></div></li>
+          <li><span class="fi"><svg aria-hidden="true"><use href="#i-clock"/></svg></span><div><p class="title-4"><span lang="zh">近 30 天吐槽标签</span><span lang="en">Last 30 days of tags</span></p><p class="caption-5"><span lang="zh">比如“晚 7 点后排队约 40 分钟”</span><span lang="en">e.g. "40 min queue after 7 pm"</span></p></div></li>
+          <li><span class="fi"><svg aria-hidden="true"><use href="#i-tag"/></svg></span><div><p class="title-4"><span lang="zh">标签计数，不是 AI 文案</span><span lang="en">Counts, not AI text</span></p><p class="caption-5"><span lang="zh">看提及人数和占比</span><span lang="en">See how many people mentioned it</span></p></div></li>
+        </ul>
       </article>
       <article class="feat reveal">
         <div><span class="kicker caption-3">03 · Book it</span><h3 class="display heading-5">Queue, Vote, Book</h3></div>
         <p class="desc body-6"><span lang="zh">实时排队和今晚空位。挑 3 到 4 家发到微信群一键投票，票数出来直接订座。</span><span lang="en">Live queues and tonight's tables. Send 3 to 4 options to your WeChat group, vote, then book.</span></p>
         <div class="ph feat-art wide" data-file="images/panda-group.png"><img src="images/panda-group.png" alt="" onerror="this.parentNode.classList.add('missing')"></div>
-        <div class="shot tall"><img src="images/shot-vote.jpg" alt="微信群里的好友投票卡片"></div>
+        <ul class="feat-list">
+          <li><span class="fi"><svg aria-hidden="true"><use href="#i-clock"/></svg></span><div><p class="title-4"><span lang="zh">实时排队和今晚空位</span><span lang="en">Live queue and tables</span></p><p class="caption-5"><span lang="zh">出发前就知道要不要等</span><span lang="en">Know before you leave</span></p></div></li>
+          <li><span class="fi"><svg aria-hidden="true"><use href="#i-chat"/></svg></span><div><p class="title-4"><span lang="zh">微信群一键投票</span><span lang="en">One tap WeChat vote</span></p><p class="caption-5"><span lang="zh">挑 3 到 4 家发给朋友</span><span lang="en">Send 3 to 4 options to friends</span></p></div></li>
+          <li><span class="fi"><svg aria-hidden="true"><use href="#i-calcheck"/></svg></span><div><p class="title-4"><span lang="zh">票数出来直接订座</span><span lang="en">Votes in, table booked</span></p><p class="caption-5"><span lang="zh">不用再等人说“随便”</span><span lang="en">No more "whatever"</span></p></div></li>
+        </ul>
       </article>
     </div>
   </div>
