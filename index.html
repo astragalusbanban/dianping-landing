@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>不知道吃什么？点一下小熊猫 · 大众点评 AI 选餐（课程概念页）</title>
+<meta name="description" content="按你的口味挑店，避雷只来自真实到店的人，今晚有位直接订。NTU MC6368 课程作业概念页。">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FF6633">
+<meta property="og:title" content="不知道吃什么？点一下小熊猫。">
+<meta property="og:description" content="按你的口味挑店，避雷只来自真实到店的人，今晚有位直接订。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/panda-lie.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="images/panda-lie-head.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* 整页一个橙色"舞台"；最亮的 #FF6633 留给顶栏，深棕留给唯一的主按钮 */
+:root{
+  --stage:#C9461B;       /* 舞台底色（加深的点评橙，保证白字可读） */
+  --velvet:#B23C15;      /* 舞台上凸起的面板 */
+  --brand:#FF6633;       /* 大众点评橙：顶栏、底栏、强调 */
+  --brown:#3E2619;       /* 深棕：主按钮、正文 */
+  --brown-2:#6B4A38;
+  --brown-3:#8A6A58;
+  --cream:#FFF8F2;       /* 舞台上的文字 / 浅色区块底 */
+  --dust:#FFE0CC;        /* 舞台上的次要文字 */
+  --hair:rgba(255,232,222,0.28);
+  --card:#FFFFFF;
+  --line:#F1DFD1;
+  --tint:#FFE9DD;
+  --ink-orange:#C2410C;
+  --ease:cubic-bezier(0.22,1,0.36,1);
+  --f-body:"Manrope","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;
+  --f-display:"Noto Serif SC","Songti SC","STSong",Georgia,serif;
+  --s25:2px;--s50:4px;--s75:8px;--s100:12px;--s200:16px;--s300:24px;--s400:32px;--s500:40px;--s600:48px;--s700:64px;--s800:80px;--s900:96px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--stage);scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--stage);color:var(--cream);font-family:var(--f-body);font-size:16px;line-height:24px;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+h1,h2,h3{text-wrap:balance}
+p{text-wrap:pretty}
+:focus-visible{outline:3px solid var(--cream);outline-offset:3px;border-radius:8px}
+/* 中英切换 */
+html.zh [lang="en"]{display:none!important}
+html.en [lang="zh"]{display:none!important}
+
+/* ===== Text styles ===== */
+.display{font-family:var(--f-display);font-weight:700;letter-spacing:0.01em}
+.heading-1{font-size:60px;line-height:1.15}
+.heading-2{font-size:48px;line-height:1.15}
+.heading-3{font-size:36px;line-height:1.2}
+.heading-5{font-size:24px;line-height:32px;font-weight:600}
+.heading-6{font-size:20px;line-height:28px;font-weight:600}
+.title-2{font-size:18px;line-height:28px;font-weight:500}
+.title-3{font-size:16px;line-height:24px;font-weight:600}
+.title-4{font-size:14px;line-height:20px;font-weight:600}
+.body-3{font-size:16px;line-height:24px;font-weight:400}
+.body-6{font-size:14px;line-height:20px;font-weight:400}
+.button-lg{font-size:18px;line-height:28px;font-weight:700}
+.button-sm{font-size:14px;line-height:20px;font-weight:600}
+.caption-3{font-size:12px;line-height:16px;font-weight:600}
+.caption-5{font-size:12px;line-height:16px;font-weight:400}
+
+/* ===== Layout ===== */
+.wrap{width:100%;max-width:1152px;margin:0 auto;padding:0 var(--s200)}
+section{padding:var(--s800) 0}
+.eyebrow{display:inline-block;color:var(--dust);text-transform:uppercase;letter-spacing:0.24em}
+.sec-head{max-width:680px;margin-bottom:var(--s500)}
+.sec-head h2{margin-top:var(--s100)}
+.sec-head p{margin-top:var(--s200);color:var(--dust)}
+.skip{position:absolute;left:var(--s200);top:-64px;background:var(--brown);color:var(--cream);padding:var(--s75) var(--s100);border-radius:8px;z-index:100;transition:transform .3s var(--ease)}
+.skip:focus{transform:translateY(96px)}
+
+/* ===== Image placeholder（缺图时显示文件名）===== */
+.ph{position:relative}
+.ph img{width:100%;height:100%;object-fit:contain}
+.ph::after{content:attr(data-file);display:none;position:absolute;inset:0;align-items:center;justify-content:center;text-align:center;padding:var(--s50);
+  font-size:12px;line-height:16px;font-weight:600;color:var(--brown-3);border:2px dashed #E2C7B2;border-radius:inherit;background:var(--cream);word-break:break-all}
+.ph.missing img{visibility:hidden}
+.ph.missing::after{display:flex}
+
+/* ===== Buttons ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s75);border:0;cursor:pointer;white-space:nowrap;
+  transition:background-color .3s var(--ease),transform .5s var(--ease),box-shadow .3s var(--ease)}
+.btn svg{width:20px;height:20px;transition:transform .5s var(--ease)}
+.btn:hover svg{transform:translateX(4px)}
+.btn:active{transform:scale(0.98)}
+.btn-main{background:var(--brown);color:var(--cream);min-height:56px;padding:var(--s100) var(--s400);border-radius:9999px;box-shadow:0 16px 40px -12px rgba(40,14,4,0.7),0 0 0 1px rgba(255,248,242,0.12)}
+.btn-main:hover{background:#2B1A11;transform:translateY(-2px);box-shadow:0 20px 48px -12px rgba(40,14,4,0.8),0 0 0 1px rgba(255,248,242,0.2)}
+.btn-sm{background:var(--brown);color:var(--cream);padding:var(--s75) var(--s100);border-radius:9999px}
+.btn-sm:hover{background:#2B1A11}
+
+/* ===== Header（亮橙顶栏）===== */
+header{position:sticky;top:0;z-index:50;background:var(--brand);color:var(--brown);box-shadow:0 4px 24px -8px rgba(80,20,0,0.5)}
+header .wrap{display:flex;align-items:center;gap:var(--s200);padding-top:var(--s100);padding-bottom:var(--s100)}
+.logo{width:152px;height:44px;border-radius:12px;background:var(--cream);padding:var(--s75) var(--s100)}
+.spacer{flex:1}
+.langs{display:flex;border:1px solid rgba(62,38,25,0.35);border-radius:9999px;padding:var(--s25)}
+.langs button{border:0;background:transparent;cursor:pointer;color:var(--brown);padding:var(--s50) var(--s100);border-radius:9999px;transition:background-color .3s var(--ease),color .3s var(--ease)}
+.langs button[aria-pressed="true"]{background:var(--brown);color:var(--brand)}
+
+/* ===== Hero ===== */
+.hero{position:relative;overflow:hidden;padding:var(--s700) 0 var(--s600);isolation:isolate;
+  background:radial-gradient(50% 60% at 78% 45%,rgba(255,102,51,0.85),transparent 72%),linear-gradient(rgba(201,70,27,0.86),rgba(201,70,27,0.9)),url("images/food-hero.jpg") center/cover,var(--stage)}
+.hero-grid{display:grid;gap:var(--s500);align-items:center}
+.hero-copy{max-width:680px;display:flex;flex-direction:column;align-items:flex-start;gap:var(--s300)}
+.offer{display:inline-flex;align-items:center;gap:var(--s75);padding:var(--s50) var(--s100);border:1px solid rgba(255,224,204,0.5);background:rgba(62,38,25,0.18);border-radius:9999px;color:var(--cream)}
+.offer i{width:8px;height:8px;border-radius:9999px;background:var(--cream);box-shadow:0 0 10px var(--cream)}
+.hero h1 .accent{color:#FFD7A8}
+.lede{color:var(--dust);max-width:540px}
+.lede b{color:var(--cream);font-weight:600}
+.cta-row{display:flex;flex-direction:column;align-items:flex-start;gap:var(--s100)}
+.note{display:flex;align-items:center;gap:var(--s75);color:var(--dust)}
+.note svg{width:16px;height:16px;flex:none}
+.slogan{color:#FFD7A8;letter-spacing:0.12em}
+
+.visual{position:relative;height:420px;width:100%;max-width:520px;margin:0 auto}
+.visual .phone{position:absolute;right:4%;top:0;width:170px;transform:rotate(5deg)}
+.panda-hero{position:absolute;left:-4%;bottom:-8px;width:250px;aspect-ratio:900/606;z-index:2;filter:drop-shadow(0 24px 32px rgba(60,10,0,0.5));animation:float 4.5s var(--ease) infinite alternate}
+@keyframes float{from{transform:translateY(0) rotate(-2deg)}to{transform:translateY(-14px) rotate(2deg)}}
+.chat{position:absolute;left:0;top:var(--s400);width:min(64%,310px);display:flex;flex-direction:column;gap:var(--s75);z-index:3}
+.bubble{border-radius:16px;padding:var(--s75) var(--s100);box-shadow:0 16px 32px -12px rgba(40,10,0,0.55)}
+.bubble.me{align-self:flex-end;background:var(--cream);color:var(--brown);border-bottom-right-radius:4px;max-width:90%}
+.bubble.ai{background:rgba(43,26,17,0.94);border:1px solid rgba(255,178,143,0.35);color:var(--cream);border-bottom-left-radius:4px}
+.ai-label{display:flex;justify-content:space-between;gap:var(--s75);color:#FFB28F;margin-bottom:var(--s50);text-transform:uppercase;letter-spacing:0.08em}
+.tag{display:inline-block;padding:0 var(--s50);border-radius:4px;font-size:12px;line-height:16px;font-weight:700;vertical-align:1px}
+.tag.match{background:var(--brand);color:var(--cream)}
+.tag.ok{background:#D7F5DF;color:#0D3A1A}
+.js .bubble{opacity:0;transform:translateY(8px)}
+.js .bubble.in{opacity:1;transform:none;transition:opacity .6s var(--ease),transform .6s var(--ease)}
+
+.phone{padding:6px;background:#1A0E08;border-radius:30px;box-shadow:0 0 0 1px rgba(255,255,255,0.1),0 40px 70px -20px rgba(40,10,0,0.8)}
+.phone .ph{aspect-ratio:750/1624;border-radius:24px;overflow:hidden;background:var(--cream)}
+.phone .ph img{object-fit:cover}
+
+/* ===== 转化卡片（深棕带）===== */
+.convert{background:var(--brown);padding:calc(var(--s900) + var(--s200)) 0 var(--s700)}
+.convert-grid{display:grid;gap:var(--s300)}
+.card{background:var(--velvet);border:1px solid var(--hair);border-radius:24px;padding:var(--s400) var(--s300)}
+.picker{position:relative;background:var(--stage);border-color:rgba(255,102,51,0.6);box-shadow:0 32px 72px -36px rgba(20,6,0,0.8)}
+.picker h2{margin-top:var(--s75)}
+.picker > p{margin-top:var(--s100);color:var(--dust)}
+.field{margin-top:var(--s300)}
+.field-label{color:var(--dust);margin-bottom:var(--s75);display:block}
+.chips{display:flex;flex-wrap:wrap;gap:var(--s75)}
+.chip{border:1px solid rgba(255,232,222,0.45);background:transparent;color:var(--cream);cursor:pointer;padding:var(--s75) var(--s200);border-radius:9999px;
+  transition:background-color .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease),transform .5s var(--ease)}
+.chip:hover{border-color:var(--cream);background:rgba(255,248,242,0.08)}
+.chip:active{transform:scale(0.97)}
+.chip[aria-pressed="true"]{background:var(--cream);color:var(--brown);border-color:var(--cream)}
+.summary{margin-top:var(--s300);padding:var(--s100) var(--s200);border-radius:12px;background:rgba(62,38,25,0.28);color:var(--dust)}
+.summary b{color:var(--cream);font-weight:600}
+.picker .btn-main{margin-top:var(--s300);width:100%}
+.picker .fine{margin-top:var(--s100);color:var(--dust);text-align:center}
+.proof{display:flex;flex-direction:column;justify-content:center;gap:var(--s300)}
+.proof h3{color:var(--cream)}
+.promise{list-style:none;display:grid;gap:var(--s200)}
+.promise li{display:flex;gap:var(--s100);align-items:flex-start}
+.promise .ic{width:32px;height:32px;flex:none;border-radius:9999px;background:rgba(255,248,242,0.12);display:flex;align-items:center;justify-content:center;color:#FFD7A8}
+.promise .ic svg{width:18px;height:18px}
+.promise p{color:var(--dust);margin-top:var(--s25)}
+.mini-quote{border-top:1px solid var(--hair);padding-top:var(--s300)}
+.mini-quote blockquote{font-family:var(--f-display);font-size:20px;line-height:30px;font-weight:600}
+.mini-quote cite{display:block;margin-top:var(--s75);font-style:normal;color:var(--dust)}
+
+/* ===== 痛点 ===== */
+.pain-grid{display:grid;gap:var(--s200)}
+.pain{display:flex;flex-direction:column;gap:var(--s200)}
+.pain.card{padding-top:0;overflow:hidden}
+.pain-img{aspect-ratio:16/10;overflow:hidden;margin:0 calc(var(--s300) * -1)}
+@media (min-width:768px){.pain-img{margin:0 calc(var(--s500) * -1)}}
+.pain-img img{width:100%;height:100%;object-fit:cover}
+.pain .big{font-family:var(--f-display);font-size:48px;line-height:1;font-weight:700;color:#FFD7A8}
+.pain .big small{font-size:24px}
+.pain .say{display:flex;gap:var(--s75);flex-wrap:wrap}
+.pain .say span{background:var(--cream);color:var(--brown);border-radius:12px 12px 12px 4px;padding:var(--s50) var(--s100)}
+.pain p{color:var(--dust)}
+
+/* ===== 三步 ===== */
+.steps{list-style:none;display:grid;gap:var(--s200);counter-reset:s}
+.step{position:relative;padding:var(--s300);border-radius:24px;border:1px solid var(--hair);background:rgba(62,38,25,0.14)}
+.step .n{font-family:var(--f-display);font-size:48px;line-height:1;font-weight:700;color:#FFD7A8}
+.step h3{margin-top:var(--s200)}
+.step p{margin-top:var(--s75);color:var(--dust)}
+.step .ui{margin-top:var(--s200)}
+
+/* 代码画的小 UI */
+.ui-card{background:var(--card);color:var(--brown);border-radius:16px;padding:var(--s200);box-shadow:0 24px 48px -24px rgba(40,10,0,0.6)}
+.ui-row{display:flex;align-items:center;justify-content:space-between;gap:var(--s100)}
+.ui-muted{color:var(--brown-3)}
+.ui-chip{display:inline-flex;align-items:center;gap:var(--s50);padding:var(--s25) var(--s75);border-radius:6px;background:#F4F1EE;color:var(--brown-2)}
+.ui-chip.o{background:var(--tint);color:var(--ink-orange)}
+.ui-match{display:inline-block;padding:var(--s25) var(--s75);border-radius:6px;background:var(--brand);color:var(--card);font-weight:700}
+.ui-stars{color:var(--brand);letter-spacing:1px}
+.ui-meta{display:flex;flex-wrap:wrap;gap:var(--s75);margin-top:var(--s100)}
+.panda-btn{width:48px;height:48px;border-radius:9999px;background:var(--tint);border:2px solid var(--card);box-shadow:0 8px 16px -6px rgba(62,38,25,0.35);overflow:hidden}
+.panda-btn img{object-fit:cover;object-position:center}
+.picker-panda{position:absolute;right:var(--s300);top:-92px;width:150px;aspect-ratio:900/606;z-index:2;filter:drop-shadow(0 12px 16px rgba(40,10,0,0.45))}
+/* 真实截图片段 */
+.shot{border-radius:16px;overflow:hidden;background:var(--card);box-shadow:0 24px 48px -24px rgba(40,10,0,0.6)}
+.shot img{width:100%;height:auto;display:block}
+.shot.tall{max-height:420px;-webkit-mask-image:linear-gradient(180deg,#000 80%,transparent);mask-image:linear-gradient(180deg,#000 80%,transparent)}
+.shot.tall img{object-fit:cover;object-position:top}
+.shot.small{width:96px;border-radius:16px}
+.step .ui.shot{margin-top:var(--s200)}
+.step .shot-row{display:flex;align-items:center;gap:var(--s200);background:var(--card);color:var(--brown);border-radius:16px;padding:var(--s100);box-shadow:0 24px 48px -24px rgba(40,10,0,0.6)}
+.head-art{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s200)}
+.head-art .art{width:120px;flex:none;aspect-ratio:1;margin-bottom:var(--s400);filter:drop-shadow(0 16px 24px rgba(60,10,0,0.4))}
+.feat{position:relative}
+.feat .feat-art{position:absolute;top:-24px;right:-8px;width:104px;aspect-ratio:1;filter:drop-shadow(0 12px 20px rgba(60,10,0,0.45));z-index:2}
+.feat .feat-art.wide{width:148px;aspect-ratio:1672/941;top:-16px}
+.feat .shot{margin-top:auto}
+
+/* ===== 猜你馋了 ===== */
+.rail{display:flex;gap:var(--s200);overflow-x:auto;scroll-snap-type:x mandatory;padding:var(--s50) var(--s200) var(--s300);margin:0 calc(var(--s200) * -1);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.rail::-webkit-scrollbar{display:none}
+.dish{flex:0 0 68%;max-width:260px;scroll-snap-align:start;scroll-margin-left:var(--s200);background:var(--card);color:var(--brown);border-radius:24px;padding:var(--s100);
+  transition:transform .5s var(--ease),box-shadow .3s var(--ease);box-shadow:0 24px 48px -28px rgba(40,10,0,0.7)}
+.dish:hover{transform:translateY(-4px)}
+.dish-img{aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:var(--tint)}
+.dish-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.dish:hover .dish-img img{transform:scale(1.04)}
+.credit{color:rgba(62,38,25,0.7)}
+.credit a{text-decoration:underline;text-underline-offset:2px}
+.dish-body{padding:var(--s100) var(--s50) var(--s50)}
+.dish-body p{color:var(--brown-3);margin-top:var(--s25)}
+.dish .ui-match{margin-top:var(--s100)}
+.dots{display:flex;gap:var(--s75);justify-content:center}
+.dots span{width:8px;height:8px;border-radius:9999px;background:rgba(255,248,242,0.35);transition:transform .3s var(--ease),background-color .3s var(--ease)}
+.dots span.on{background:var(--cream);transform:scale(1.25)}
+
+/* ===== 三大功能 ===== */
+.features{background:var(--velvet)}
+.feat-grid{display:grid;gap:var(--s200)}
+.feat{border-radius:24px;border:1px solid var(--hair);background:var(--stage);padding:var(--s300);display:flex;flex-direction:column;gap:var(--s200)}
+.feat .kicker{color:#FFD7A8;letter-spacing:0.16em;text-transform:uppercase}
+.feat h3{margin-top:var(--s50)}
+.feat .name{color:var(--dust)}
+.feat .desc{color:var(--dust)}
+.feat .ui-card{margin-top:auto}
+.bar{height:6px;border-radius:9999px;background:#F1ECE8;margin-top:var(--s75);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:9999px;background:var(--brand);transform-origin:left;transform:scaleX(0);transition:transform 1s var(--ease)}
+.in .bar i{transform:scaleX(var(--v))}
+.alert-row + .alert-row{margin-top:var(--s200)}
+.vote-row + .vote-row{margin-top:var(--s100)}
+.vote-btn{margin-top:var(--s200);width:100%;text-align:center;background:var(--brand);color:var(--card);border-radius:9999px;padding:var(--s75)}
+
+/* ===== 用户原话（浅色区）===== */
+.sheet{background:var(--cream);color:var(--brown)}
+.sheet .eyebrow{color:var(--ink-orange)}
+.sheet .sec-head p{color:var(--brown-2)}
+.quote-grid{display:grid;gap:var(--s200)}
+.quote{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:var(--s300);display:flex;flex-direction:column;justify-content:space-between;gap:var(--s300)}
+.quote blockquote{font-family:var(--f-display);font-size:20px;line-height:30px;font-weight:600}
+.quote cite{font-style:normal;color:var(--brown-3)}
+
+/* ===== FAQ ===== */
+.faq-list{max-width:760px;display:grid;gap:var(--s100)}
+.faq{border-radius:16px;background:var(--card);border:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:var(--s200);padding:var(--s200) var(--s300);border-radius:16px;transition:background-color .3s var(--ease)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:hover{background:#FFF3EA}
+.faq .chev{width:32px;height:32px;flex:none;border-radius:9999px;background:var(--tint);color:var(--ink-orange);display:flex;align-items:center;justify-content:center;transition:transform .5s var(--ease)}
+.faq .chev svg{width:16px;height:16px}
+.faq[open] .chev{transform:rotate(180deg)}
+.faq .ans{padding:0 var(--s300) var(--s300);color:var(--brown-2)}
+.faq[open] .ans{animation:ans .5s var(--ease)}
+@keyframes ans{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+
+/* ===== 结尾 ===== */
+.close{text-align:center;position:relative;overflow:hidden;background:radial-gradient(50% 60% at 50% 40%,rgba(255,102,51,0.8),transparent 72%),var(--stage)}
+.close .panda-end{width:260px;aspect-ratio:900/606;margin:0 auto var(--s200);filter:drop-shadow(0 24px 32px rgba(60,10,0,0.5));animation:float 4.5s var(--ease) infinite alternate}
+.tagline{max-width:720px;margin:0 auto}
+.tagline .w{color:rgba(255,248,242,0.3);transition:color .6s var(--ease)}
+.tagline .w.on{color:var(--cream)}
+.close p{margin:var(--s200) auto 0;color:var(--dust)}
+.close .btn-main{margin-top:var(--s400)}
+
+/* ===== Footer ===== */
+footer{background:var(--brand);color:var(--brown);padding:var(--s400) 0}
+.foot{display:flex;flex-direction:column;gap:var(--s200);align-items:flex-start}
+
+/* ===== 手机底部固定按钮 ===== */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;align-items:center;gap:var(--s100);
+  padding:var(--s100) var(--s200) calc(var(--s100) + env(safe-area-inset-bottom));background:rgba(178,60,21,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-top:1px solid var(--hair);transform:translateY(110%);transition:transform .5s var(--ease)}
+.sticky.show{transform:none}
+.sticky .panda-btn{flex:none}
+.sticky .btn-main{flex:1;min-height:48px;padding:var(--s75) var(--s200)}
+
+/* ===== Reveal ===== */
+.js .reveal{opacity:0;transform:translateY(32px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.js .reveal.in{opacity:1;transform:none}
+
+/* ===== Mobile ===== */
+@media (max-width:767px){
+  footer{padding-bottom:calc(var(--s400) + 72px + env(safe-area-inset-bottom))}
+  .heading-1{font-size:36px}
+  .heading-2{font-size:30px}
+  .heading-3{font-size:24px}
+  .langs button{padding:var(--s50) var(--s75)}
+  header .btn-sm{display:none}
+  .chat{top:var(--s300)}
+  .panda-hero{width:210px}
+  .picker-panda{width:128px;top:-80px}
+}
+@media (min-width:768px){
+  .wrap{padding:0 var(--s400)}
+  section{padding:var(--s900) 0}
+  .pain-grid,.steps,.feat-grid{grid-template-columns:repeat(3,1fr)}
+  .quote-grid{grid-template-columns:repeat(2,1fr)}
+  .rail{margin:0 calc(var(--s400) * -1);padding-left:var(--s400);padding-right:var(--s400)}
+  .dish{flex-basis:240px;scroll-margin-left:var(--s400)}
+  .card{padding:var(--s500)}
+}
+@media (min-width:960px){
+  .hero{padding:var(--s800) 0}
+  .hero-grid{grid-template-columns:1.05fr 0.95fr;gap:var(--s600)}
+  .cta-row{flex-direction:row;align-items:center;gap:var(--s300)}
+  .visual{height:520px}
+  .visual .phone{width:220px}
+  .panda-hero{width:340px}
+  .chat{width:330px}
+  .convert-grid{grid-template-columns:1.1fr 0.9fr;gap:var(--s400)}
+  .rail{display:grid;grid-template-columns:repeat(5,1fr);overflow:visible;margin:0;padding:var(--s50) 0 var(--s300)}
+  .dish{max-width:none}
+  .dots,.sticky{display:none}
+  .close .panda-end{width:320px}
+  .head-art .art{width:180px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important}
+  .js .reveal,.js .bubble{transform:none;transition:opacity .4s linear}
+  .bar i{transition:none}
+  .tagline .w{color:var(--cream);transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip button-sm" href="#main"><span lang="zh">跳到正文</span><span lang="en">Skip to content</span></a>
+
+<!-- ★ 所有“立即试试 AI 选餐”按钮的跳转地址：你的 Lovable 原型 AI 选餐页 -->
+<script>window.CTA_URL = "https://dianping-dining-compass.lovable.app/results";</script>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 256 256"><path d="M40 128h176M144 56l72 72-72 72" fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-caret" viewBox="0 0 256 256"><path d="M208 96l-80 80-80-80" fill="none" stroke="currentColor" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 256 256"><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-width="20"/><path d="M88 136l24 24 56-56" fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 256 256"><path d="M128 24l22 70 70 22-70 22-22 70-22-70-70-22 70-22z" fill="currentColor"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 256 256"><path d="M40 56v56c0 84 88 112 88 112s88-28 88-112V56l-88-24Z" fill="none" stroke="currentColor" stroke-width="20" stroke-linejoin="round"/><path d="M92 128l24 24 48-48" fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 256 256"><rect x="32" y="88" width="192" height="48" rx="8" fill="none" stroke="currentColor" stroke-width="20"/><path d="M208 136v72a8 8 0 0 1-8 8H56a8 8 0 0 1-8-8v-72M128 88v128M128 88s-40 0-52-12a20 20 0 0 1 28-28c12 12 24 40 24 40Zm0 0s40 0 52-12a20 20 0 0 0-28-28c-12 12-24 40-24 40Z" fill="none" stroke="currentColor" stroke-width="20" stroke-linejoin="round"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 256 256"><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-width="20"/><path d="M128 72v56h56" fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<header>
+  <div class="wrap">
+    <a href="#top" aria-label="大众点评"><div class="ph logo" data-file="images/logo.png"><img src="images/logo.png" alt="大众点评" onerror="this.parentNode.classList.add('missing')"></div></a>
+    <span class="spacer"></span>
+    <div class="langs" role="group" aria-label="语言 Language">
+      <button class="button-sm" type="button" data-lang="zh" aria-pressed="true">中</button>
+      <button class="button-sm" type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <a class="btn btn-sm button-sm" data-cta href="#"><span lang="zh">试试 AI 选餐</span><span lang="en">Try AI pick</span></a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ① Hero -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="offer caption-3"><i></i><span lang="zh">新功能 · Match with You · 免费</span><span lang="en">New · Match with You · Free</span></span>
+      <h1 class="display heading-1">
+        <span lang="zh">不知道吃什么？<br>点一下<span class="accent">小熊猫</span>。</span>
+        <span lang="en">Can't decide what to eat?<br>Tap the <span class="accent">red panda</span>.</span>
+      </h1>
+      <p class="lede title-2">
+        <span lang="zh">按你的口味挑店，<b>避雷只来自真实到店的人</b>，今晚有位直接订。</span>
+        <span lang="en">Places picked for your taste, <b>warnings only from people who actually ate there</b>, and a table tonight in one tap.</span>
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-main button-lg" id="hero-cta" data-cta href="#"><span lang="zh">立即试试 AI 选餐</span><span lang="en">Try AI pick now</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <span class="note body-6"><svg aria-hidden="true"><use href="#i-check"/></svg><span lang="zh">免费，选几项就能开始</span><span lang="en">Free. Pick a few options to start.</span></span>
+      </div>
+      <p class="slogan caption-3">Find it! Trust it! Book it now!</p>
+    </div>
+
+    <div class="visual" aria-hidden="true">
+      <div class="phone"><div class="ph" data-file="images/home-float.jpg"><img src="images/home-float.jpg" alt="" onerror="this.parentNode.classList.add('missing')"></div></div>
+      <div class="ph panda-hero" data-file="images/panda-lie.png"><img src="images/panda-lie.png" alt="" onerror="this.parentNode.classList.add('missing')"></div>
+      <div class="chat">
+        <div class="bubble me body-6"><span lang="zh">4 个人，人均 120，想吃辣</span><span lang="en">4 of us, about ¥120 each, something spicy</span></div>
+        <div class="bubble ai body-6">
+          <div class="ai-label caption-3"><span>小熊猫 AI</span><span lang="zh">今晚</span><span lang="en">Tonight</span></div>
+          <span lang="zh">一家川菜馆 <span class="tag match">与你匹配 97%</span><br>排队 10 分钟，今晚 7 点有位 <span class="tag ok">已到店评价</span></span>
+          <span lang="en">A Sichuan spot <span class="tag match">97% match</span><br>10 min queue, table at 7 pm <span class="tag ok">verified reviews</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ② 转化卡片：迷你选餐 + 承诺 -->
+<section class="convert" id="try">
+  <div class="wrap convert-grid">
+    <div class="card picker reveal">
+      <div class="ph picker-panda" aria-hidden="true" data-file="images/panda-lie.png"><img src="images/panda-lie.png" alt="" onerror="this.parentNode.classList.add('missing')"></div>
+      <span class="eyebrow caption-3"><span lang="zh">30 秒试一下</span><span lang="en">Try it in 30 seconds</span></span>
+      <h2 class="display heading-3"><span lang="zh">今晚，想吃点什么？</span><span lang="en">What are you craving tonight?</span></h2>
+      <p class="body-6"><span lang="zh">点几下，小熊猫按“与你匹配”帮你排好。</span><span lang="en">Tap a few chips and the panda ranks places by how well they match you.</span></p>
+
+      <div class="field">
+        <span class="field-label title-4"><span lang="zh">口味</span><span lang="en">Taste</span></span>
+        <div class="chips" data-group="taste">
+          <button class="chip body-6" type="button" aria-pressed="true" data-zh="川菜" data-en="Sichuan"><span lang="zh">川菜</span><span lang="en">Sichuan</span></button>
+          <button class="chip body-6" type="button" aria-pressed="false" data-zh="日料" data-en="Japanese"><span lang="zh">日料</span><span lang="en">Japanese</span></button>
+          <button class="chip body-6" type="button" aria-pressed="false" data-zh="法餐" data-en="French"><span lang="zh">法餐</span><span lang="en">French</span></button>
+          <button class="chip body-6" type="button" aria-pressed="false" data-zh="粤菜" data-en="Cantonese"><span lang="zh">粤菜</span><span lang="en">Cantonese</span></button>
+          <button class="chip body-6" type="button" aria-pressed="false" data-zh="火锅" data-en="Hotpot"><span lang="zh">火锅</span><span lang="en">Hotpot</span></button>
+        </div>
+      </div>
+      <div class="field">
+        <span class="field-label title-4"><span lang="zh">人均预算</span><span lang="en">Budget per person</span></span>
+        <div class="chips" data-group="budget">
+          <button class="chip body-6" type="button" aria-pressed="false" data-zh="¥60 内" data-en="under ¥60">¥60</button>
+          <button class="chip body-6" type="button" aria-pressed="true" data-zh="¥120 内" data-en="under ¥120">¥120</button>
+          <button class="chip body-6" type="button" aria-pressed="false" data-zh="¥200 内" data-en="under ¥200">¥200</button>
+        </div>
+      </div>
+      <div class="field">
+        <span class="field-label title-4"><span lang="zh">人数</span><span lang="en">Party size</span></span>
+        <div class="chips" data-group="people">
+          <button class="chip body-6" type="button" aria-pressed="false" data-zh="1 人" data-en="1 person">1</button>
+          <button class="chip body-6" type="button" aria-pressed="false" data-zh="2 人" data-en="2 people">2</button>
+          <button class="chip body-6" type="button" aria-pressed="true" data-zh="4 人" data-en="4 people">4</button>
+          <button class="chip body-6" type="button" aria-pressed="false" data-zh="6 人以上" data-en="6+ people">6+</button>
+        </div>
+      </div>
+      <div class="field">
+        <span class="field-label title-4"><span lang="zh">区域</span><span lang="en">Area</span></span>
+        <div class="chips" data-group="area">
+          <button class="chip body-6" type="button" aria-pressed="true" data-zh="中街" data-en="Zhongjie">中街</button>
+          <button class="chip body-6" type="button" aria-pressed="false" data-zh="太原街" data-en="Taiyuan St">太原街</button>
+          <button class="chip body-6" type="button" aria-pressed="false" data-zh="浑南" data-en="Hunnan">浑南</button>
+          <button class="chip body-6" type="button" aria-pressed="false" data-zh="北市场" data-en="Beishichang">北市场</button>
+        </div>
+      </div>
+
+      <p class="summary body-6" id="summary" aria-live="polite"></p>
+      <a class="btn btn-main button-lg" data-cta href="#"><span lang="zh">立即试试 AI 选餐</span><span lang="en">Try AI pick now</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <p class="fine caption-5"><span lang="zh">免费 · 不用注册 · 不用填问卷</span><span lang="en">Free · No sign up · No long survey</span></p>
+    </div>
+
+    <div class="card proof reveal">
+      <h3 class="display heading-5"><span lang="zh">为什么可以放心用</span><span lang="en">Why you can trust it</span></h3>
+      <ul class="promise">
+        <li><span class="ic"><svg aria-hidden="true"><use href="#i-shield"/></svg></span><div><p class="title-3" style="color:var(--cream);margin:0"><span lang="zh">避雷只算真实到店的人</span><span lang="en">Only verified diners count</span></span></p><p class="body-6"><span lang="zh">只统计有核销订单的用户，是标签计数，不是 AI 写的文字。</span><span lang="en">Only users with a redeemed order are counted. Tags are tallies, not AI written text.</span></p></div></li>
+        <li><span class="ic"><svg aria-hidden="true"><use href="#i-spark"/></svg></span><div><p class="title-3" style="color:var(--cream);margin:0"><span lang="zh">越吃越懂你</span><span lang="en">Gets better every meal</span></p><p class="body-6"><span lang="zh">从你的收藏、评分和饭后反馈里自动学习。</span><span lang="en">Learns from your saves, ratings and after meal feedback.</span></p></div></li>
+        <li><span class="ic"><svg aria-hidden="true"><use href="#i-gift"/></svg></span><div><p class="title-3" style="color:var(--cream);margin:0"><span lang="zh">完全免费</span><span lang="en">Completely free</span></p><p class="body-6"><span lang="zh">选几项就能开始，不用先填长问卷。</span><span lang="en">Start with a few taps. No long survey first.</span></p></div></li>
+      </ul>
+      <figure class="mini-quote">
+        <blockquote>“会比我自己一家一家地翻，减少一些时间成本。”</blockquote>
+        <figcaption><cite class="body-6">— 梅馨予 <span lang="zh">· 用户访谈</span><span lang="en">· user interview</span></cite></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ③ 痛点 -->
+<section id="pain">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow caption-3"><span lang="zh">你是不是也这样</span><span lang="en">Sound familiar?</span></span>
+      <h2 class="display heading-2"><span lang="zh">选一家店，比吃饭还累</span><span lang="en">Picking a place is harder than eating</span></h2>
+    </div>
+    <div class="pain-grid">
+      <article class="card pain reveal">
+        <div class="pain-img"><img src="images/pain-rating.jpg" alt="一道精致的高分餐厅菜品" loading="lazy"></div>
+        <div class="big">4.8<small>★</small></div>
+        <h3 class="heading-6"><span lang="zh">4.8 分的店，也不一定适合你</span><span lang="en">A 4.8 rating doesn't mean it suits you</span></h3>
+        <p class="body-6"><span lang="zh">总分是所有人的平均，不是你的口味和预算。</span><span lang="en">The score averages everyone, not your taste or budget.</span></p>
+      </article>
+      <article class="card pain reveal">
+        <div class="pain-img"><img src="images/pain-group.jpg" alt="朋友聚餐的一桌火锅" loading="lazy"></div>
+        <div class="say body-6"><span lang="zh">随便</span><span lang="zh">都行</span><span lang="zh">你定吧</span><span lang="en">Whatever</span><span lang="en">Anything</span><span lang="en">You pick</span></div>
+        <h3 class="heading-6"><span lang="zh">群里全是“随便”“都行”，没人拍板</span><span lang="en">The group chat says "whatever" and nobody decides</span></h3>
+        <p class="body-6"><span lang="zh">链接发了一堆，聊了半小时，还是没定下来。</span><span lang="en">Links pile up, half an hour passes, still no plan.</span></p>
+      </article>
+      <article class="card pain reveal">
+        <div class="pain-img"><img src="images/pain-queue.jpg" alt="蒸笼里热腾腾的小笼包" loading="lazy"></div>
+        <div class="big">40<small lang="zh"> 分钟</small><small lang="en"> min</small></div>
+        <h3 class="heading-6"><span lang="zh">到店才发现要排 40 分钟</span><span lang="en">You arrive to a 40 minute queue</span></h3>
+        <p class="body-6"><span lang="zh">饿着肚子在门口等号，今晚的计划全乱了。</span><span lang="en">Hungry at the door, and the evening plan falls apart.</span></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ④ 三步 -->
+<section id="how" style="padding-top:0">
+  <div class="wrap">
+    <div class="head-art">
+      <div class="sec-head reveal">
+        <span class="eyebrow caption-3"><span lang="zh">三步搞定</span><span lang="en">How it works</span></span>
+        <h2 class="display heading-2"><span lang="zh">点一下，选几项，就有答案</span><span lang="en">One tap, a few choices, done</span></h2>
+      </div>
+      <div class="ph art reveal" data-file="images/panda-checkin.png"><img src="images/panda-checkin.png" alt="" onerror="this.parentNode.classList.add('missing')"></div>
+    </div>
+    <ol class="steps">
+      <li class="step reveal">
+        <div class="n">01</div>
+        <h3 class="heading-6"><span lang="zh">点首页的小熊猫</span><span lang="en">Tap the panda on the home screen</span></h3>
+        <p class="body-6"><span lang="zh">它就在大众点评首页右下角。</span><span lang="en">It sits at the bottom right of the Dianping home screen.</span></p>
+        <div class="ui shot-row">
+          <div class="shot small"><img src="images/shot-panda-btn.jpg" alt="首页右下角的点仔推荐按钮"></div>
+          <span class="body-6 ui-muted"><span lang="zh">首页右下角，随时都在</span><span lang="en">Always at the bottom right of Home</span></span>
+        </div>
+      </li>
+      <li class="step reveal">
+        <div class="n">02</div>
+        <h3 class="heading-6"><span lang="zh">选口味、预算、人数</span><span lang="en">Pick taste, budget and party size</span></h3>
+        <p class="body-6"><span lang="zh">再选个区域，几秒钟就填完。</span><span lang="en">Add an area. It takes seconds.</span></p>
+        <div class="ui shot"><img src="images/shot-form.jpg" alt="选择最近状态、口味偏好、用餐人数和人均预算"></div>
+      </li>
+      <li class="step reveal">
+        <div class="n">03</div>
+        <h3 class="heading-6"><span lang="zh">得到为你排序的推荐</span><span lang="en">Get places ranked for you</span></h3>
+        <p class="body-6"><span lang="zh">按“与你匹配”排序，最适合你的排最前。</span><span lang="en">Sorted by match, best fit first.</span></p>
+        <div class="ui shot"><img src="images/shot-result.jpg" alt="推荐结果卡片：与你匹配、排队时间和今晚空位"></div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ⑤ 猜你馋了 -->
+<section id="daily" style="padding-top:0">
+  <div class="wrap">
+    <div class="head-art">
+      <div class="sec-head reveal">
+        <span class="eyebrow caption-3"><span lang="zh">猜你馋了</span><span lang="en">Daily picks</span></span>
+        <h2 class="display heading-2"><span lang="zh">每天 5 家，越吃越懂你</span><span lang="en">Five picks a day, sharper every meal</span></h2>
+        <p class="body-3"><span lang="zh">你收藏、评分、饭后反馈得越多，推荐就越准。</span><span lang="en">The more you save, rate and give feedback, the better it gets.</span></p>
+      </div>
+      <div class="ph art reveal" data-file="images/panda-photo.png"><img src="images/panda-photo.png" alt="" onerror="this.parentNode.classList.add('missing')"></div>
+    </div>
+    <div class="rail reveal" id="rail" tabindex="0" aria-label="猜你馋了 · Daily picks">
+      <article class="dish"><div class="dish-img"><img src="images/dish-sichuan.jpg" alt="一锅红油串串" loading="lazy"></div><div class="dish-body"><h3 class="title-2"><span lang="zh">川菜</span><span lang="en">Sichuan</span></h3><p class="body-6"><span lang="zh">麻辣 · 人均 ¥108</span><span lang="en">Numbing and spicy · ¥108 pp</span></p><span class="ui-match caption-3"><span lang="zh">与你匹配 97%</span><span lang="en">97% match</span></span></div></article>
+      <article class="dish"><div class="dish-img"><img src="images/dish-japanese.jpg" alt="一盘寿司拼盘" loading="lazy"></div><div class="dish-body"><h3 class="title-2"><span lang="zh">日料</span><span lang="en">Japanese</span></h3><p class="body-6"><span lang="zh">寿司 · 人均 ¥168</span><span lang="en">Sushi · ¥168 pp</span></p><span class="ui-match caption-3"><span lang="zh">与你匹配 95%</span><span lang="en">95% match</span></span></div></article>
+      <article class="dish"><div class="dish-img"><img src="images/dish-french.jpg" alt="一盘法式焗蜗牛" loading="lazy"></div><div class="dish-body"><h3 class="title-2"><span lang="zh">法餐</span><span lang="en">French</span></h3><p class="body-6"><span lang="zh">小酒馆 · 人均 ¥236</span><span lang="en">Bistro · ¥236 pp</span></p><span class="ui-match caption-3"><span lang="zh">与你匹配 93%</span><span lang="en">93% match</span></span></div></article>
+      <article class="dish"><div class="dish-img"><img src="images/dish-cantonese.jpg" alt="一桌粤式早茶点心" loading="lazy"></div><div class="dish-body"><h3 class="title-2"><span lang="zh">粤菜</span><span lang="en">Cantonese</span></h3><p class="body-6"><span lang="zh">早茶点心 · 人均 ¥89</span><span lang="en">Dim sum · ¥89 pp</span></p><span class="ui-match caption-3"><span lang="zh">与你匹配 91%</span><span lang="en">91% match</span></span></div></article>
+      <article class="dish"><div class="dish-img"><img src="images/dish-hotpot.jpg" alt="一锅鸳鸯火锅" loading="lazy"></div><div class="dish-body"><h3 class="title-2"><span lang="zh">火锅</span><span lang="en">Hotpot</span></h3><p class="body-6"><span lang="zh">鸳鸯锅 · 人均 ¥127</span><span lang="en">Split pot · ¥127 pp</span></p><span class="ui-match caption-3"><span lang="zh">与你匹配 90%</span><span lang="en">90% match</span></span></div></article>
+    </div>
+    <div class="dots" id="dots" aria-hidden="true"><span class="on"></span><span></span><span></span><span></span><span></span></div>
+  </div>
+</section>
+
+<!-- ⑥ 三大功能 -->
+<section class="features" id="features">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow caption-3"><span lang="zh">三个新功能</span><span lang="en">Three new features</span></span>
+      <h2 class="display heading-2"><span lang="zh">从找店到订座，一次走完</span><span lang="en">From finding to booking, in one flow</span></h2>
+    </div>
+    <div class="feat-grid">
+      <article class="feat reveal">
+        <div><span class="kicker caption-3">01 · Find it</span><h3 class="display heading-5">Match with You</h3></div>
+        <p class="desc body-6"><span lang="zh">按口味、预算、人数和区域，推荐按“与你匹配”排序，而不是只看总分。每天还有“猜你馋了”5 家。</span><span lang="en">Ranked by how well each place fits your taste, budget, group and area, not just the overall score. Plus five daily picks.</span></p>
+        <div class="ph feat-art" data-file="images/panda-eat.png"><img src="images/panda-eat.png" alt="" onerror="this.parentNode.classList.add('missing')"></div>
+        <div class="shot"><img src="images/shot-daily.jpg" alt="首页的猜你馋了卡片"></div>
+      </article>
+      <article class="feat reveal">
+        <div><span class="kicker caption-3">02 · Trust it</span><h3 class="display heading-5">Verified <span lang="zh">避雷</span> Alert</h3></div>
+        <p class="desc body-6"><span lang="zh">最近 30 天的吐槽标签，只统计有核销订单的真实到店用户。</span><span lang="en">Complaint tags from the last 30 days, counted only from diners with a redeemed order.</span></p>
+        <div class="ph feat-art" data-file="images/panda-detective.png"><img src="images/panda-detective.png" alt="" onerror="this.parentNode.classList.add('missing')"></div>
+        <div class="shot"><img src="images/shot-alert.jpg" alt="店铺页的近 30 天避雷摘要，只统计已到店用户"></div>
+      </article>
+      <article class="feat reveal">
+        <div><span class="kicker caption-3">03 · Book it</span><h3 class="display heading-5">Queue, Vote, Book</h3></div>
+        <p class="desc body-6"><span lang="zh">实时排队和今晚空位。挑 3 到 4 家发到微信群一键投票，票数出来直接订座。</span><span lang="en">Live queues and tonight's tables. Send 3 to 4 options to your WeChat group, vote, then book.</span></p>
+        <div class="ph feat-art wide" data-file="images/panda-group.png"><img src="images/panda-group.png" alt="" onerror="this.parentNode.classList.add('missing')"></div>
+        <div class="shot tall"><img src="images/shot-vote.jpg" alt="微信群里的好友投票卡片"></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ⑦ 用户原话 + FAQ（浅色区）-->
+<div class="sheet">
+  <section id="voices">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow caption-3"><span lang="zh">用户怎么说</span><span lang="en">What users said</span></span>
+        <h2 class="display heading-2"><span lang="zh">来自用户访谈的原话</span><span lang="en">In their own words</span></h2>
+      </div>
+      <div class="quote-grid">
+        <figure class="quote reveal"><blockquote>“A high rating doesn't necessarily mean it suits everyone.”</blockquote><figcaption><cite class="body-6">— 管玮婧</cite></figcaption></figure>
+        <figure class="quote reveal"><blockquote>“有的时候我觉得需求是在搜索中发现出来的。”</blockquote><figcaption><cite class="body-6">— 杨贺婷</cite></figcaption></figure>
+        <figure class="quote reveal"><blockquote>“会比我自己一家一家地翻，减少一些时间成本。”</blockquote><figcaption><cite class="body-6">— 梅馨予</cite></figcaption></figure>
+        <figure class="quote reveal"><blockquote>“I really like this voting feature. If it's built, I'll definitely use it.”</blockquote><figcaption><cite class="body-6">— 肖晨曦</cite></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow caption-3"><span lang="zh">常见疑问</span><span lang="en">FAQ</span></span>
+        <h2 class="display heading-2"><span lang="zh">你可能想问</span><span lang="en">You might be wondering</span></h2>
+      </div>
+      <div class="faq-list reveal">
+        <details class="faq" open>
+          <summary class="title-2"><span><span lang="zh">评价会不会是 AI 写的？</span><span lang="en">Are the reviews written by AI?</span></span><span class="chev"><svg aria-hidden="true"><use href="#i-caret"/></svg></span></summary>
+          <p class="ans body-3"><span lang="zh">避雷标签只统计有核销订单的用户，而且是标签计数，不是 AI 生成的文字。</span><span lang="en">Warning tags only count users with a redeemed order, and they are tag counts, not AI generated text.</span></p>
+        </details>
+        <details class="faq">
+          <summary class="title-2"><span><span lang="zh">要先填很长的问卷吗？</span><span lang="en">Do I need to fill in a long survey first?</span></span><span class="chev"><svg aria-hidden="true"><use href="#i-caret"/></svg></span></summary>
+          <p class="ans body-3"><span lang="zh">不用，选几项就能开始，之后从你的收藏、评分和饭后反馈里自动学习。</span><span lang="en">No. Pick a few options to start. It then learns from your saves, ratings and after meal feedback.</span></p>
+        </details>
+        <details class="faq">
+          <summary class="title-2"><span><span lang="zh">要收费吗？</span><span lang="en">Does it cost anything?</span></span><span class="chev"><svg aria-hidden="true"><use href="#i-caret"/></svg></span></summary>
+          <p class="ans body-3"><span lang="zh">免费。</span><span lang="en">It's free.</span></p>
+        </details>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ⑧ 结尾 CTA -->
+<section class="close" id="final">
+  <div class="wrap">
+    <div class="ph panda-end reveal" data-file="images/panda-lie.png"><img src="images/panda-lie.png" alt="小熊猫趴着冲你眨眼" onerror="this.parentNode.classList.add('missing')"></div>
+    <h2 class="display heading-1 tagline" id="tagline">Find it! Trust it!<br>Book it now!</h2>
+    <p class="title-2"><span lang="zh">今晚吃什么，交给小熊猫。</span><span lang="en">Leave tonight's dinner to the red panda.</span></p>
+    <a class="btn btn-main button-lg" id="final-cta" data-cta href="#"><span lang="zh">立即试试 AI 选餐</span><span lang="en">Try AI pick now</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="ph logo" data-file="images/logo.png"><img src="images/logo.png" alt="大众点评" onerror="this.parentNode.classList.add('missing')"></div>
+    <p class="body-6"><span lang="zh">NTU MC6368 课程作业概念页，非大众点评官方页面</span><span lang="en">NTU MC6368 course concept page. Not an official Dianping page.</span></p>
+    <p class="caption-5 credit"><span lang="zh">美食照片来自 </span><span lang="en">Food photos from </span><a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a>: Fernando Santos, Luna Wang, Jakub Dziubak, Cathrine Skovly, Van Thanh, Yihan Wang, Carla Martinesi, Cera, Sunira Moses</p>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky">
+  <span class="ph panda-btn" data-file="panda"><img src="images/panda-lie-head.png" alt="" onerror="this.parentNode.classList.add('missing')"></span>
+  <a class="btn btn-main button-lg" data-cta href="#"><span lang="zh">立即试试 AI 选餐</span><span lang="en">Try AI pick now</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+</div>
+
+<script>
+(function(){
+  var root = document.documentElement;
+  root.classList.add('js');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasIO = 'IntersectionObserver' in window;
+
+  // 中 / EN 切换（记住上次选择）
+  var lang = 'zh';
+  try { var saved = localStorage.getItem('dp-lang'); if(saved === 'en' || saved === 'zh') lang = saved; } catch(e){}
+  function setLang(l){
+    lang = l;
+    root.classList.remove('zh','en'); root.classList.add(l);
+    root.setAttribute('lang', l === 'zh' ? 'zh-CN' : 'en');
+    document.querySelectorAll('[data-lang]').forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.lang === l ? 'true' : 'false'); });
+    document.title = l === 'zh' ? '不知道吃什么？点一下小熊猫 · 大众点评 AI 选餐（课程概念页）' : 'Tap the red panda · Dianping AI pick (course concept)';
+    try { localStorage.setItem('dp-lang', l); } catch(e){}
+    updateSummary();
+  }
+  document.querySelectorAll('[data-lang]').forEach(function(b){ b.addEventListener('click', function(){ setLang(b.dataset.lang); }); });
+
+  // 迷你选餐：单选 chips + 汇总 + 带参跳转
+  var summary = document.getElementById('summary');
+  function picked(group){ var b = document.querySelector('[data-group="'+group+'"] [aria-pressed="true"]'); return b ? b.dataset[lang] : ''; }
+  function updateSummary(){
+    var t = picked('taste'), b = picked('budget'), p = picked('people'), a = picked('area');
+    summary.innerHTML = lang === 'zh'
+      ? '小熊猫会按 <b>' + [t,b,p,a].join(' · ') + '</b> 帮你排序'
+      : 'The panda will rank places for <b>' + [t,b,p,a].join(' · ') + '</b>';
+    var q = '?from=landing&taste=' + encodeURIComponent(picked('taste')) + '&budget=' + encodeURIComponent(picked('budget')) + '&people=' + encodeURIComponent(picked('people')) + '&area=' + encodeURIComponent(picked('area'));
+    document.querySelectorAll('[data-cta]').forEach(function(x){ x.href = window.CTA_URL + q; });
+  }
+  document.querySelectorAll('.chips').forEach(function(group){
+    group.addEventListener('click', function(e){
+      var btn = e.target.closest('.chip'); if(!btn) return;
+      group.querySelectorAll('.chip').forEach(function(c){ c.setAttribute('aria-pressed', c === btn ? 'true' : 'false'); });
+      updateSummary();
+    });
+  });
+  setLang(lang);
+
+  // 滚动淡入（只触发一次）
+  var els = document.querySelectorAll('.reveal');
+  if(hasIO){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+    els.forEach(function(el){ io.observe(el); });
+  } else { els.forEach(function(el){ el.classList.add('in'); }); }
+
+  // Hero 气泡依次出现
+  document.querySelectorAll('.bubble').forEach(function(b,i){ setTimeout(function(){ b.classList.add('in'); }, reduce ? 0 : 600 + i * 900); });
+
+  // 手机底部固定按钮
+  var sticky = document.getElementById('sticky'), heroOut = false, finalIn = false;
+  function upd(){ sticky.classList.toggle('show', heroOut && !finalIn); }
+  if(hasIO){
+    new IntersectionObserver(function(e){ heroOut = !e[0].isIntersecting && e[0].boundingClientRect.top < 0; upd(); }).observe(document.getElementById('hero-cta'));
+    new IntersectionObserver(function(e){ finalIn = e[0].isIntersecting; upd(); }).observe(document.getElementById('final-cta'));
+  } else { sticky.classList.add('show'); }
+
+  // 猜你馋了：指示点
+  var rail = document.getElementById('rail'), dots = document.querySelectorAll('#dots span'), cards = rail.children, ticking = false;
+  rail.addEventListener('scroll', function(){
+    if(ticking) return; ticking = true;
+    requestAnimationFrame(function(){
+      var w = cards[0].offsetWidth + 16, i = Math.round(rail.scrollLeft / w);
+      if(rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 4) i = cards.length - 1;
+      dots.forEach(function(d,k){ d.classList.toggle('on', k === i); });
+      ticking = false;
+    });
+  }, {passive:true});
+
+  // 结尾口号逐词点亮
+  var tag = document.getElementById('tagline');
+  tag.innerHTML = tag.innerHTML.split(/(<br>)/).map(function(part){
+    return part === '<br>' ? part : part.split(' ').map(function(w){ return '<span class="w">' + w + '</span>'; }).join(' ');
+  }).join('');
+  var words = tag.querySelectorAll('.w');
+  if(reduce){ words.forEach(function(w){ w.classList.add('on'); }); return; }
+  var t2 = false;
+  function light(){
+    var r = tag.getBoundingClientRect(), vh = innerHeight;
+    var p = (vh * 0.85 - r.top) / (vh * 0.4);
+    var n = Math.max(0, Math.min(words.length, Math.floor(p * words.length)));
+    words.forEach(function(w,k){ w.classList.toggle('on', k < n); });
+    t2 = false;
+  }
+  addEventListener('scroll', function(){ if(!t2){ t2 = true; requestAnimationFrame(light); } }, {passive:true});
+  light();
+})();
+</script>
+</body>
+</html>
