@@ -722,7 +722,8 @@ footer{background:var(--brand);color:var(--brown);padding:var(--s400) 0}
 <section class="close" id="final">
   <div class="wrap">
     <div class="ph panda-end reveal" data-file="images/panda-lie.png"><img src="images/panda-lie.png" alt="点仔趴着冲你眨眼" onerror="this.parentNode.classList.add('missing')"></div>
-    <h2 class="display heading-1 tagline" id="tagline">Crave it. Tap it.<br>Trust it. Sorted!</h2>
+    <h2 class="display heading-1 tagline" lang="zh">心动有去处，<br>美味有把握。</h2>
+    <h2 class="display heading-1 tagline" lang="en">Crave it. Tap it.<br>Trust it. Sorted!</h2>
     <p class="title-2"><span lang="zh">今晚吃什么，交给点仔。</span><span lang="en">Leave tonight's dinner to Dianzai.</span></p>
     <a class="btn btn-main button-lg" id="final-cta" data-cta href="#"><span lang="zh">立即试试 AI 选餐</span><span lang="en">Try AI pick now</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
   </div>
@@ -816,22 +817,31 @@ footer{background:var(--brand);color:var(--brown);padding:var(--s400) 0}
     });
   }, {passive:true});
 
-  // 结尾口号逐词点亮
-  var tag = document.getElementById('tagline');
-  tag.innerHTML = tag.innerHTML.split(/(<br>)/).map(function(part){
-    return part === '<br>' ? part : part.split(' ').map(function(w){ return '<span class="w">' + w + '</span>'; }).join(' ');
-  }).join('');
-  var words = tag.querySelectorAll('.w');
-  if(reduce){ words.forEach(function(w){ w.classList.add('on'); }); return; }
+  // 结尾口号逐词点亮（英文按词，中文按字）
+  var tags = document.querySelectorAll('.tagline');
+  tags.forEach(function(tag){
+    var en = tag.getAttribute('lang') === 'en';
+    tag.innerHTML = tag.innerHTML.split(/(<br>)/).map(function(part){
+      if(part === '<br>') return part;
+      var units = en ? part.split(' ') : Array.from(part);
+      return units.map(function(w){ return '<span class="w">' + w + '</span>'; }).join(en ? ' ' : '');
+    }).join('');
+  });
+  if(reduce){ document.querySelectorAll('.tagline .w').forEach(function(w){ w.classList.add('on'); }); return; }
   var t2 = false;
   function light(){
-    var r = tag.getBoundingClientRect(), vh = innerHeight;
-    var p = (vh * 0.85 - r.top) / (vh * 0.4);
-    var n = Math.max(0, Math.min(words.length, Math.floor(p * words.length)));
-    words.forEach(function(w,k){ w.classList.toggle('on', k < n); });
+    var vh = innerHeight;
+    tags.forEach(function(tag){
+      if(!tag.offsetParent) return;
+      var words = tag.querySelectorAll('.w'), r = tag.getBoundingClientRect();
+      var p = (vh * 0.85 - r.top) / (vh * 0.4);
+      var n = Math.max(0, Math.min(words.length, Math.floor(p * words.length)));
+      words.forEach(function(w,k){ w.classList.toggle('on', k < n); });
+    });
     t2 = false;
   }
   addEventListener('scroll', function(){ if(!t2){ t2 = true; requestAnimationFrame(light); } }, {passive:true});
+  document.querySelectorAll('[data-lang]').forEach(function(b){ b.addEventListener('click', function(){ requestAnimationFrame(light); }); });
   light();
 })();
 </script>
