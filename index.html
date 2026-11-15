@@ -320,6 +320,7 @@ header .wrap{display:flex;align-items:center;gap:var(--s200);padding-top:var(--s
 .close{text-align:center;position:relative;overflow:hidden;background:radial-gradient(50% 60% at 50% 40%,rgba(255,102,51,0.8),transparent 72%),var(--stage)}
 .close .panda-end{width:260px;aspect-ratio:900/606;margin:0 auto var(--s200);filter:drop-shadow(0 24px 32px rgba(60,10,0,0.5));animation:float 4.5s var(--ease) infinite alternate}
 .tagline{max-width:720px;margin:0 auto}
+.tagline[lang="en"]{max-width:none}
 .tagline .w{color:rgba(255,248,242,0.3);transition:color .6s var(--ease)}
 .tagline .w.on{color:var(--cream)}
 .close p{margin:var(--s200) auto 0;color:var(--dust)}
@@ -343,6 +344,7 @@ footer{background:var(--brand);color:var(--brown);padding:var(--s400) 0}
 
 /* ===== Mobile ===== */
 @media (max-width:767px){
+  .tagline[lang="en"]{font-size:clamp(20px,7.2vw,36px)}
   .visual .phone{width:196px}
   .mock{padding:var(--s75) var(--s75) 0;gap:var(--s50)}
   .mock .title-4{font-size:12px;line-height:16px}
@@ -723,7 +725,7 @@ footer{background:var(--brand);color:var(--brown);padding:var(--s400) 0}
   <div class="wrap">
     <div class="ph panda-end reveal" data-file="images/panda-lie.png"><img src="images/panda-lie.png" alt="点仔趴着冲你眨眼" onerror="this.parentNode.classList.add('missing')"></div>
     <h2 class="display heading-1 tagline" lang="zh">心动有去处，<br>美味有把握。</h2>
-    <h2 class="display heading-1 tagline" lang="en">Crave it. Tap it.<br>Trust it. Sorted!</h2>
+    <h2 class="display heading-1 tagline" lang="en">Crave it. Tap it. Trust it.<br>Sorted!</h2>
     <p class="title-2"><span lang="zh">今晚吃什么，交给点仔。</span><span lang="en">Leave tonight's dinner to Dianzai.</span></p>
     <a class="btn btn-main button-lg" id="final-cta" data-cta href="#"><span lang="zh">立即试试 AI 选餐</span><span lang="en">Try AI pick now</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
   </div>
